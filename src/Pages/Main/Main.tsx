@@ -35,7 +35,8 @@ const Main = () => {
             ({
               id,
               attribute: { name, brand, fuelType, segment, imageUrl },
-              amount
+              amount,
+              createdAt
             }) => (
               <CardItem
                 key={id}
@@ -46,6 +47,7 @@ const Main = () => {
                 fuelType={fuelType}
                 amount={amount}
                 imageUrl={imageUrl}
+                createdAt={createdAt}
               />
             )
           )}

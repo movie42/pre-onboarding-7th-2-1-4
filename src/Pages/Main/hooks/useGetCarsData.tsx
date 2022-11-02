@@ -13,8 +13,8 @@ interface CarsData {
   attribute: {
     brand: string;
     name: string;
-    segment: string;
-    fuelType: string;
+    segment: "C" | "D" | "E" | "SUV";
+    fuelType: "gasoline" | "hybrid" | "ev";
     imageUrl: string;
   };
   amount: number;

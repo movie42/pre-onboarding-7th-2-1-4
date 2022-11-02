@@ -1,15 +1,19 @@
-import { Image } from "@/Components";
 import React, { useEffect, useState } from "react";
 import styled, { css } from "styled-components";
+
+import { Image } from "@/Components";
+import { useCalculateDate, useChangeAmountToLocalString } from "@/lib/hooks";
+import useChangeFuelSegmentEnumToKorean from "@/lib/hooks/useChangeFuelSegmentEnumToKorean";
 
 interface CardItemProps {
   id: number;
   name: string;
   brand: string;
-  segment: string;
-  fuelType: string;
+  segment: "C" | "D" | "E" | "SUV";
+  fuelType: "gasoline" | "hybrid" | "ev";
   amount: number;
   imageUrl: string;
+  createdAt: string;
 }
 
 const CardItem = ({
@@ -19,13 +23,20 @@ const CardItem = ({
   segment,
   fuelType,
   amount,
-  imageUrl
+  imageUrl,
+  createdAt
 }: CardItemProps) => {
   const [isNew, setIsNew] = useState(false);
+  const { day } = useCalculateDate(createdAt);
+  const { fuel: fuelKorean, segment: segmentKorean } =
+    useChangeFuelSegmentEnumToKorean(fuelType, segment);
+  const amountKorea = useChangeAmountToLocalString(amount, "ko-KR");
 
-  const handleIsNew = (date: string) => {
-    const now = new Date();
-  };
+  useEffect(() => {
+    if (day < 2) {
+      setIsNew(true);
+    }
+  }, [day]);
 
   return (
     <Container data-id={id}>
@@ -36,9 +47,9 @@ const CardItem = ({
         </BrandNameContainer>
         <SegmentFuelAmountContainer>
           <div>
-            <span>{segment}</span> / <span>{fuelType}</span>
+            <span>{segmentKorean}</span> / <span>{fuelKorean}</span>
           </div>
-          <span>월 {amount} 원 부터</span>
+          <span>월 {amountKorea} 원 부터</span>
         </SegmentFuelAmountContainer>
       </InfoContainer>
       <ImageContainer isNew={isNew}>
@@ -79,6 +90,17 @@ const ImageContainer = styled.div<{ isNew: boolean }>`
   position: relative;
 
   &::after {
+    ${({ isNew }) => {
+      if (isNew) {
+        return css`
+          visibility: visible;
+        `;
+      }
+      return css`
+        visibility: hidden;
+      `;
+    }}
+
     position: absolute;
     top: -1.2rem;
     right: -1.2rem;
