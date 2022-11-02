@@ -4,7 +4,7 @@ import styled from "styled-components";
 import MainHeader from "../Headers/MainHeader";
 import Meta from "../Meta/Meta";
 
-const MainLayouts = () => {
+const MainLayout = () => {
   return (
     <Container>
       <Meta />
@@ -16,7 +16,7 @@ const MainLayouts = () => {
   );
 };
 
-export default MainLayouts;
+export default MainLayout;
 
 const Container = styled.div``;
 const Main = styled.main``;
