@@ -1,15 +1,23 @@
 import React from "react";
 import styled from "styled-components";
 import { FiArrowLeft } from "react-icons/fi";
+import IconButton from "../Button/IconButton";
+import { useNavigate } from "react-router-dom";
+
 const DetailHeader = () => {
+  const navigate = useNavigate();
+
+  const handleGoToBefore = () => {
+    navigate(-1);
+  };
+
   return (
     <Header>
-      <ArrowContainer>
-        <span className="hidden-text">뒤로가기</span>
+      <IconButton onClick={handleGoToBefore} accessibilityText="뒤로가기">
         <FiArrowLeft />
-      </ArrowContainer>
+      </IconButton>
       <div>
-        <h1>전체 차량</h1>
+        <h1>차량상세</h1>
       </div>
     </Header>
   );
@@ -30,20 +38,5 @@ const Header = styled.header`
     text-align: center;
     font-size: 1.7rem;
     font-weight: 700;
-  }
-`;
-
-const ArrowContainer = styled.div`
-  box-sizing: border-box;
-  display: block;
-  font-size: 2rem;
-  .hidden-text {
-    position: absolute;
-    overflow: hidden;
-    width: 1px;
-    height: 1px;
-    margin: -1px -1px;
-    top: -1px;
-    left: -1px;
   }
 `;

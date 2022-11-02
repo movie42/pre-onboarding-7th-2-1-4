@@ -3,7 +3,7 @@ import styled from "styled-components";
 const MainHeader = () => {
   return (
     <Header>
-      <h1>전체 차량</h1>
+      <h1>전체차량</h1>
     </Header>
   );
 };
