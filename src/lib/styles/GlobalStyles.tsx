@@ -1,6 +1,7 @@
 import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
   /* http://meyerweb.com/eric/tools/css/reset/ 
    v2.0 | 20110126
    License: none (public domain)
@@ -50,7 +51,7 @@ const GlobalStyle = createGlobalStyle`
     }
     html,body{
         font-size:10px;
-        font-family: -apple-system, 'Noto Sans KR', sans-serif;
+        font-family: 'Inter', sans-serif;
     }
     a{
         text-decoration: none;
