@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
-const useCalculateDate = (dateString: string) => {
+const useCalculateDate = () => {
   const [minute, setMinute] = useState(0);
   const [hour, setHour] = useState(0);
   const [day, setDay] = useState(0);
+  const [week, setWeek] = useState("");
   const [date, setDate] = useState(0);
   const [month, setMonth] = useState(0);
   const [year, setYear] = useState(0);
@@ -16,10 +17,13 @@ const useCalculateDate = (dateString: string) => {
     const amountTimeFromNow = now - createDateToTime;
     const amountTimeForSeconds = amountTimeFromNow / 1000;
 
+    const week = ["일", "월", "화", "수", "목", "금", "토"];
+
     const time = {
       minute: Math.floor((amountTimeForSeconds % 3600) / 60),
       hour: Math.floor(amountTimeForSeconds / 3600),
       day: Math.floor(amountTimeForSeconds / (3600 * 24)),
+      week: week[createDate.getDay()],
       date: createDate.getDate(),
       month: createDate.getMonth() + 1,
       year: createDate.getFullYear()
@@ -28,16 +32,13 @@ const useCalculateDate = (dateString: string) => {
     setMinute(time.minute);
     setHour(time.hour);
     setDay(time.day);
+    setWeek(time.week);
     setDate(time.date);
     setMonth(time.month);
     setYear(time.year);
   };
 
-  useEffect(() => {
-    calculateDate(dateString);
-  }, [dateString]);
-
-  return { minute, hour, day, date, month, year };
+  return { minute, hour, day, week, date, month, year, calculateDate };
 };
 
 export default useCalculateDate;

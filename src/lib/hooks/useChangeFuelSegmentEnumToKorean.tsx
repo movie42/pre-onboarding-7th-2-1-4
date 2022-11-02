@@ -1,31 +1,23 @@
-import { useEffect, useState } from "react";
-
-type FuelType = "gasoline" | "hybrid" | "ev" | undefined;
-type SegmentType = "C" | "D" | "E" | "SUV" | undefined;
+import { useState } from "react";
+type FuelType = "gasoline" | "hybrid" | "ev";
+type SegmentType = "C" | "D" | "E" | "SUV";
 
 const fuelKorean = { gasoline: "가솔린", ev: "전기", hybrid: "하이브리드" };
 const segmentKorean = { C: "소형", D: "중형", E: "대형", SUV: "SUV" };
 
-const useChangeFuelSegmentEnumToKorean = (
-  fuelType: FuelType,
-  segmentType: SegmentType
-) => {
+const useChangeFuelSegmentEnumToKorean = () => {
   const [fuel, setFuel] = useState("");
   const [segment, setSegment] = useState("");
 
-  useEffect(() => {
-    if (fuelType) {
-      setFuel(fuelKorean[fuelType]);
-    }
-  }, [fuelType]);
+  const changeFuelToKorean = (fuelType: FuelType) => {
+    setFuel(fuelKorean[fuelType]);
+  };
 
-  useEffect(() => {
-    if (segmentType) {
-      setSegment(segmentKorean[segmentType]);
-    }
-  }, [segmentType]);
+  const changeSegmentToKorean = (segmentType: SegmentType) => {
+    setSegment(segmentKorean[segmentType]);
+  };
 
-  return { fuel, segment };
+  return { fuel, segment, changeFuelToKorean, changeSegmentToKorean };
 };
 
 export default useChangeFuelSegmentEnumToKorean;

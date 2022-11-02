@@ -1,16 +1,14 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
-const useChangeAmountToLocalString = (
-  amount: number,
-  local: Intl.LocalesArgument
-) => {
+const useChangeAmountToLocalString = () => {
   const [amountLocalString, setAmountToLocalString] = useState("");
 
-  useEffect(() => {
+  const changeLocalString = (amount: number, local: Intl.LocalesArgument) => {
     setAmountToLocalString(amount.toLocaleString(local));
-  }, [amount]);
+    return amount.toLocaleString(local);
+  };
 
-  return amountLocalString;
+  return { amountLocalString, changeLocalString };
 };
 
 export default useChangeAmountToLocalString;
