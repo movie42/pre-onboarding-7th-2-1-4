@@ -18,9 +18,9 @@ export const getCarsDetailInfo = async (
   fuelType: GetCarsDataParas["fuelType"],
   segment: GetCarsDataParas["segment"]
 ) => {
-  const response = await instance.get(
+  const { data } = await instance.get(
     `?fuelType=${fuelType}&segment=${segment}`
   );
 
-  return response;
+  return data;
 };
