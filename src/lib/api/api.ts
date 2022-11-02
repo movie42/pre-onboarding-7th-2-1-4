@@ -10,8 +10,8 @@ interface GetCarsDataParas {
 }
 
 export const getCarsInfo = async () => {
-  const response = await instance.get("");
-  return response;
+  const { data } = await instance.get("");
+  return data;
 };
 
 export const getCarsDetailInfo = async (
