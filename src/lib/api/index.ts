@@ -1,1 +1,1 @@
-export { getCarsInfo, getCarsDetailInfo } from "./api";
+export { getCarsInfo } from "./api";
