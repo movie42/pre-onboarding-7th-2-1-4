@@ -7,7 +7,7 @@ const Router = () => {
       <Route path="/" element={<MainLayout />}>
         <Route index element={<Main />} />
       </Route>
-      <Route path="/:cardId" element={<DetailLayout />}>
+      <Route path="/:carId" element={<DetailLayout />}>
         <Route index element={<Details />} />
       </Route>
     </Routes>

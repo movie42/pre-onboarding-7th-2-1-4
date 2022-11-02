@@ -1,5 +1,5 @@
 import React from "react";
-import { Meta, SelectButton } from "@/Components";
+import { SelectButton } from "@/Components";
 import styled from "styled-components";
 
 import { useGetCarsData } from "./hooks";

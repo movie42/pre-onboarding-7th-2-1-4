@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styled, { css } from "styled-components";
 
 import { Image } from "@/Components";
@@ -28,16 +28,28 @@ const CardItem = ({
   createdAt
 }: CardItemProps) => {
   const [isNew, setIsNew] = useState(false);
-  const { day } = useCalculateDate(createdAt);
-  const { fuel: fuelKorean, segment: segmentKorean } =
-    useChangeFuelSegmentEnumToKorean(fuelType, segment);
-  const amountKorea = useChangeAmountToLocalString(amount, "ko-KR");
+  const { day, calculateDate } = useCalculateDate();
+  const {
+    fuel: fuelKorean,
+    segment: segmentKorean,
+    changeFuelToKorean,
+    changeSegmentToKorean
+  } = useChangeFuelSegmentEnumToKorean();
+  const { amountLocalString, changeLocalString } =
+    useChangeAmountToLocalString();
 
   useEffect(() => {
     if (day < 2) {
       setIsNew(true);
     }
   }, [day]);
+
+  useEffect(() => {
+    changeFuelToKorean(fuelType);
+    changeSegmentToKorean(segment);
+    changeLocalString(amount, "ko-KR");
+    calculateDate(createdAt);
+  }, [segment, fuelType, amount, createdAt]);
 
   return (
     <Container data-id={id}>
@@ -51,7 +63,7 @@ const CardItem = ({
             <div>
               <span>{segmentKorean}</span> / <span>{fuelKorean}</span>
             </div>
-            <span>월 {amountKorea} 원 부터</span>
+            <span>월 {amountLocalString} 원 부터</span>
           </SegmentFuelAmountContainer>
         </InfoContainer>
         <ImageContainer isNew={isNew}>

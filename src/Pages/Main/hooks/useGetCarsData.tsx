@@ -4,6 +4,8 @@ import { AxiosError } from "axios";
 
 interface GetCarsDataQueryProps {
   querykey: string[];
+  segment?: "C" | "D" | "E" | "SUV" | "";
+  fuelType?: "gasoline" | "hybrid" | "ev" | "";
 }
 
 interface CarsData {
@@ -39,11 +41,15 @@ interface CarsData {
 interface GetCarsData {
   payload: CarsData[];
 }
-const useGetCarsData = ({ querykey }: GetCarsDataQueryProps) => {
+const useGetCarsData = ({
+  querykey,
+  segment,
+  fuelType
+}: GetCarsDataQueryProps) => {
   const carsQueryClient = useQueryClient();
   return useQuery<GetCarsData, AxiosError, CarsData[]>(
     querykey,
-    async () => await getCarsInfo(),
+    async () => await getCarsInfo(fuelType, segment),
     {
       select: ({ payload }) => {
         return payload;
