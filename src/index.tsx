@@ -7,6 +7,8 @@ import App from "./App";
 import { theme, GlobalStyles } from "@/lib/styles";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
+import { HelmetProvider } from "react-helmet-async";
+
 const queryClient = new QueryClient();
 
 const root = ReactDOM.createRoot(
@@ -16,10 +18,12 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       <QueryClientProvider client={queryClient}>
-        <ThemeProvider theme={theme}>
-          <GlobalStyles />
-          <App />
-        </ThemeProvider>
+        <HelmetProvider>
+          <ThemeProvider theme={theme}>
+            <GlobalStyles />
+            <App />
+          </ThemeProvider>
+        </HelmetProvider>
       </QueryClientProvider>
     </BrowserRouter>
   </React.StrictMode>
