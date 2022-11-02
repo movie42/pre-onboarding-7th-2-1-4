@@ -4,6 +4,7 @@ import styled, { css } from "styled-components";
 import { Image } from "@/Components";
 import { useCalculateDate, useChangeAmountToLocalString } from "@/lib/hooks";
 import useChangeFuelSegmentEnumToKorean from "@/lib/hooks/useChangeFuelSegmentEnumToKorean";
+import { Link } from "react-router-dom";
 
 interface CardItemProps {
   id: number;
@@ -40,23 +41,25 @@ const CardItem = ({
 
   return (
     <Container data-id={id}>
-      <InfoContainer>
-        <BrandNameContainer>
-          <h2>{brand}</h2>
-          <h2>{name}</h2>
-        </BrandNameContainer>
-        <SegmentFuelAmountContainer>
-          <div>
-            <span>{segmentKorean}</span> / <span>{fuelKorean}</span>
-          </div>
-          <span>월 {amountKorea} 원 부터</span>
-        </SegmentFuelAmountContainer>
-      </InfoContainer>
-      <ImageContainer isNew={isNew}>
-        <ImageWrapper>
-          <Image src={imageUrl} />
-        </ImageWrapper>
-      </ImageContainer>
+      <Link to={`${id}?brand=${brand}&name=${name}`}>
+        <InfoContainer>
+          <BrandNameContainer>
+            <h2>{brand}</h2>
+            <h2>{name}</h2>
+          </BrandNameContainer>
+          <SegmentFuelAmountContainer>
+            <div>
+              <span>{segmentKorean}</span> / <span>{fuelKorean}</span>
+            </div>
+            <span>월 {amountKorea} 원 부터</span>
+          </SegmentFuelAmountContainer>
+        </InfoContainer>
+        <ImageContainer isNew={isNew}>
+          <ImageWrapper>
+            <Image src={imageUrl} />
+          </ImageWrapper>
+        </ImageContainer>
+      </Link>
     </Container>
   );
 };
@@ -64,12 +67,14 @@ const CardItem = ({
 export default CardItem;
 
 const Container = styled.li`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  box-sizing: border-box;
-  padding: 2rem;
-  border-bottom: 1px solid ${(props) => props.theme.color.second100};
+  a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 2rem;
+    border-bottom: 1px solid ${(props) => props.theme.color.second100};
+  }
 `;
 
 const InfoContainer = styled.div`

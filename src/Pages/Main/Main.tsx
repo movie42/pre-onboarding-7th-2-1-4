@@ -21,7 +21,6 @@ const Main = () => {
 
   return (
     <>
-      <Meta />
       <Container>
         <SelectButtonContainer>
           {CARS_OPTION.map(({ id, option, selected }) => (
