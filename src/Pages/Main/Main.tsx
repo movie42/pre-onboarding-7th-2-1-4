@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Loading, SelectButton } from "@/Components";
+import { Loading, Meta, SelectButton } from "@/Components";
 import styled from "styled-components";
 
 import { useGetCarsData } from "./hooks";
@@ -68,46 +68,53 @@ const Main = () => {
   }
 
   return (
-    <Container>
-      <SelectButtonContainer>
-        {CARS_BUTTON_OPTIONS.map(({ segment, option }) => (
-          <SelectButton
-            key={segment}
-            segment={segment}
-            onClick={handleSearch(segment)}
-          >
-            {option}
-          </SelectButton>
-        ))}
-      </SelectButtonContainer>
-      <CardItemContainer>
-        {cars?.length === 0 ? (
-          <NotFoundCars>
-            <h2>차량이 없습니다.</h2>
-          </NotFoundCars>
-        ) : null}
-        {cars?.map(
-          ({
-            id,
-            attribute: { name, brand, fuelType, segment, imageUrl },
-            amount,
-            createdAt
-          }) => (
-            <CardItem
-              key={id}
-              id={id}
-              name={name}
-              brand={brand}
+    <>
+      <Meta
+        title="차량 상세 | 알티 모빌리티"
+        description="차량 상세 페이지"
+        imageUrl=""
+      />
+      <Container>
+        <SelectButtonContainer>
+          {CARS_BUTTON_OPTIONS.map(({ segment, option }) => (
+            <SelectButton
+              key={segment}
               segment={segment}
-              fuelType={fuelType}
-              amount={amount}
-              imageUrl={imageUrl}
-              createdAt={createdAt}
-            />
-          )
-        )}
-      </CardItemContainer>
-    </Container>
+              onClick={handleSearch(segment)}
+            >
+              {option}
+            </SelectButton>
+          ))}
+        </SelectButtonContainer>
+        <CardItemContainer>
+          {cars?.length === 0 ? (
+            <NotFoundCars>
+              <h2>차량이 없습니다.</h2>
+            </NotFoundCars>
+          ) : null}
+          {cars?.map(
+            ({
+              id,
+              attribute: { name, brand, fuelType, segment, imageUrl },
+              amount,
+              createdAt
+            }) => (
+              <CardItem
+                key={id}
+                id={id}
+                name={name}
+                brand={brand}
+                segment={segment}
+                fuelType={fuelType}
+                amount={amount}
+                imageUrl={imageUrl}
+                createdAt={createdAt}
+              />
+            )
+          )}
+        </CardItemContainer>
+      </Container>
+    </>
   );
 };
 

@@ -12,6 +12,7 @@ const Meta = ({ title, imageUrl, description }: MetaProps) => {
   const { pathname, search } = useLocation();
   return (
     <Helmet>
+      <meta property="description" content={description} />
       <meta property="og:type" content="website" />
       <meta property="og:url" content={`${pathname}${search}`} />
       <meta property="og:title" content={title} />
