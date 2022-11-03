@@ -16,15 +16,15 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <HelmetProvider>
-        <BrowserRouter>
+    <HelmetProvider>
+      <BrowserRouter>
+        <QueryClientProvider client={queryClient}>
           <ThemeProvider theme={theme}>
             <GlobalStyles />
             <App />
           </ThemeProvider>
-        </BrowserRouter>
-      </HelmetProvider>
-    </QueryClientProvider>
+        </QueryClientProvider>
+      </BrowserRouter>
+    </HelmetProvider>
   </React.StrictMode>
 );
