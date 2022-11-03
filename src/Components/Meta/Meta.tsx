@@ -20,8 +20,8 @@ const Meta = ({ title, imageUrl, description }: MetaProps) => {
       <meta property="og:description" content={description} />
       <meta property="og:site_name" content="알티 모빌리티" />
       <meta property="og:locale" content="ko_KR" />
-      <meta property="og:image:width" content="1200" />
-      <meta property="og:image:height" content="630" />
+      <meta property="og:image:width" content="600" />
+      <meta property="og:image:height" content="315" />
       <title>{title}</title>
     </Helmet>
   );
