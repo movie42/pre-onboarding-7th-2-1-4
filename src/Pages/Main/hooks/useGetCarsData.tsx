@@ -64,7 +64,8 @@ const useGetCarsData = ({ queryKey }: GetCarsDataQueryProps) => {
       onError: (error) => {
         return error;
       },
-      retry: 3,
+      retry: 10,
+      refetchOnMount: true,
       staleTime: 100000,
       cacheTime: 100000
     }
