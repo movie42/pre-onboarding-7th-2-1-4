@@ -1,0 +1,1 @@
+export { getCarsInfo } from "./api";
