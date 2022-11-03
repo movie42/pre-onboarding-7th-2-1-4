@@ -74,6 +74,11 @@ const useChangeDetailData = (data?: CarsData) => {
         amount
       } = data;
 
+      changeFuelToKorean(fuelType);
+      changeSegmentToKorean(segment);
+      calculateDate(startDate);
+      changeLocalString(amount, "ko-KR");
+
       const carInfoList = [
         { name: "차종", description: segmentKorean },
         { name: "연료", description: fuelKorean },
@@ -82,10 +87,6 @@ const useChangeDetailData = (data?: CarsData) => {
           description: `${month}월 ${date}일 (${week}) 부터`
         }
       ];
-      changeFuelToKorean(fuelType);
-      changeSegmentToKorean(segment);
-      calculateDate(startDate);
-      changeLocalString(amount, "ko-KR");
 
       const newAdditionalProducts = additionalProducts.map((value) => ({
         name: value.name,
@@ -103,7 +104,7 @@ const useChangeDetailData = (data?: CarsData) => {
         additionalProducts: newAdditionalProducts
       });
     }
-  }, [data]);
+  }, [data, segmentKorean, fuelKorean]);
 
   return detail;
 };
