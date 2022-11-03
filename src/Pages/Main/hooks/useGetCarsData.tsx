@@ -1,12 +1,13 @@
 import { getCarsInfo } from "@/lib/api";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { QueryKey, useQuery, useQueryClient } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 
 interface GetCarsDataQueryProps {
-  querykey: string[];
-  segment?: "C" | "D" | "E" | "SUV" | "";
-  fuelType?: "gasoline" | "hybrid" | "ev" | "";
+  queryKey: string[];
 }
+
+type Segment = "C" | "D" | "E" | "SUV" | "";
+type FuelType = "gasoline" | "hybrid" | "ev" | "";
 
 interface CarsData {
   id: number;
@@ -41,27 +42,31 @@ interface CarsData {
 interface GetCarsData {
   payload: CarsData[];
 }
-const useGetCarsData = ({
-  querykey,
-  segment,
-  fuelType
-}: GetCarsDataQueryProps) => {
+
+const useGetCarsData = ({ queryKey }: GetCarsDataQueryProps) => {
   const carsQueryClient = useQueryClient();
+
   return useQuery<GetCarsData, AxiosError, CarsData[]>(
-    querykey,
-    async () => await getCarsInfo(fuelType, segment),
+    queryKey,
+    async () => {
+      const [_, fuelType, segment] = queryKey;
+      const fuel = fuelType as FuelType;
+      const segmentType = segment as Segment;
+      return await getCarsInfo(fuel, segmentType);
+    },
     {
       select: ({ payload }) => {
         return payload;
       },
       onSuccess: () => {
-        carsQueryClient.invalidateQueries(querykey);
+        carsQueryClient.invalidateQueries(queryKey);
       },
       onError: (error) => {
         return error;
       },
-      retry: 10,
-      staleTime: 100000
+      retry: 3,
+      staleTime: 100000,
+      cacheTime: 100000
     }
   );
 };

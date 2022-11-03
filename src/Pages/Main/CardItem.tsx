@@ -5,6 +5,7 @@ import { Image } from "@/Components";
 import { useCalculateDate, useChangeAmountToLocalString } from "@/lib/hooks";
 import useChangeFuelSegmentEnumToKorean from "@/lib/hooks/useChangeFuelSegmentEnumToKorean";
 import { Link } from "react-router-dom";
+import NoImage from "@/Components/Image/NoImage";
 
 interface CardItemProps {
   id: number;
@@ -68,7 +69,7 @@ const CardItem = ({
         </InfoContainer>
         <ImageContainer isNew={isNew}>
           <ImageWrapper>
-            <Image src={imageUrl} />
+            {imageUrl ? <Image src={imageUrl} alt={name} /> : <NoImage />}
           </ImageWrapper>
         </ImageContainer>
       </Link>
