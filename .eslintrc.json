@@ -19,7 +19,10 @@
   "rules": {
     "@typescript-eslint/no-non-null-assertion": "off",
     "@typescript-eslint/no-explicit-any": "off",
-    "@typescript-eslint/no-unused-vars": "warn",
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      { "varsIgnorePattern": "[_]gnored" }
+    ],
     "react/react-in-jsx-scope": "off",
     "no-var": "error",
     "no-multiple-empty-lines": "error",
