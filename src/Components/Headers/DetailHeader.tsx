@@ -8,7 +8,7 @@ const DetailHeader = () => {
   const navigate = useNavigate();
 
   const handleGoToBefore = () => {
-    navigate(-1);
+    navigate("/");
   };
 
   return (

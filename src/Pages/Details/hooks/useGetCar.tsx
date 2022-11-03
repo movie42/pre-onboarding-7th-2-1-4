@@ -57,7 +57,9 @@ const useGetCar = ({ querykey, carId }: GetCarsDataQueryProps) => {
         return error;
       },
       retry: 10,
-      staleTime: 100000
+      refetchOnMount: true,
+      staleTime: 100000,
+      cacheTime: 100000
     }
   );
 };
