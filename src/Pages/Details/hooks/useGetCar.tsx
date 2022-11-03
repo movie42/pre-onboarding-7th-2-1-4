@@ -1,5 +1,5 @@
 import { getCarsInfo } from "@/lib/api";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 
 interface GetCarsDataQueryProps {
@@ -41,7 +41,6 @@ interface GetCarsData {
   payload: CarsData[];
 }
 const useGetCar = ({ querykey, carId }: GetCarsDataQueryProps) => {
-  const carsQueryClient = useQueryClient();
   return useQuery<GetCarsData, AxiosError, CarsData>(
     querykey,
     async () => await getCarsInfo(),
@@ -49,9 +48,6 @@ const useGetCar = ({ querykey, carId }: GetCarsDataQueryProps) => {
       select: ({ payload }) => {
         const [detail] = payload.filter((value) => value.id === Number(carId));
         return detail;
-      },
-      onSuccess: () => {
-        carsQueryClient.invalidateQueries(querykey);
       },
       onError: (error) => {
         return error;
