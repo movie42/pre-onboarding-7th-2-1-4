@@ -6,19 +6,16 @@ import MainHeader from "../Headers/MainHeader";
 const MainLayout = () => {
   const { carId } = useParams();
   const [isDetail, setIsDetail] = useState(true);
+
   useEffect(() => {
     if (carId) {
       setIsDetail(false);
       return;
     }
   }, [carId]);
+
   return (
-    <Container
-      onAnimationEnd={() => {
-        if (carId) setIsDetail(false);
-      }}
-      isDetail={isDetail}
-    >
+    <Container isDetail={isDetail}>
       <MainHeader />
       <Main>
         <Outlet />
