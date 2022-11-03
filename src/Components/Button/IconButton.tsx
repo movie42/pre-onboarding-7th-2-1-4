@@ -21,10 +21,10 @@ const IconButton = ({ accessibilityText, ...props }: IconButtonProps) => {
 export default IconButton;
 
 const Container = styled(Button)`
-  box-sizing: border-box;
-  display: block;
-  font-size: 2rem;
+  font-size: 1.8rem;
   border: 0;
+  height: 100%;
+  max-height: 1.8rem;
   background-color: unset;
   .hidden-text {
     position: absolute;

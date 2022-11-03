@@ -1,18 +1,46 @@
-import React, { ReactNode } from "react";
+import React, { ReactNode, useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import styled, { css } from "styled-components";
 import Button from "./Button";
 
 interface SelectButtonProps {
   children: ReactNode;
-  selected: boolean;
+  segment: string;
+  onClick: () => void;
 }
 
 interface StyledComponentsSelectButtonProps {
   selected: boolean;
 }
 
-const SelectButton = ({ selected, children }: SelectButtonProps) => {
-  return <Container selected={selected}>{children}</Container>;
+const SelectButton = ({ children, segment, ...props }: SelectButtonProps) => {
+  const { search } = useLocation();
+  const [isSelect, setIsSelect] = useState(false);
+
+  const selectedButton = (search: string) => {
+    const [_, searchQuery] = search.split("=");
+
+    if (!search && segment === "all") {
+      setIsSelect(true);
+      return;
+    }
+
+    if (searchQuery === segment) {
+      setIsSelect(true);
+      return;
+    }
+    setIsSelect(false);
+  };
+
+  useEffect(() => {
+    selectedButton(search);
+  }, [search]);
+
+  return (
+    <Container {...props} selected={isSelect}>
+      {children}
+    </Container>
+  );
 };
 
 export default SelectButton;
