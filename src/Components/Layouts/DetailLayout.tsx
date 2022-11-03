@@ -3,7 +3,6 @@ import { Outlet, useParams } from "react-router-dom";
 import styled, { css, keyframes } from "styled-components";
 
 import DetailHeader from "../Headers/DetailHeader";
-import Meta from "../Meta/Meta";
 
 const DetailLayout = () => {
   const { carId } = useParams();
@@ -21,7 +20,6 @@ const DetailLayout = () => {
       }}
       isDetail={isDetail}
     >
-      <Meta />
       <DetailHeader />
       <Main>
         <Outlet />

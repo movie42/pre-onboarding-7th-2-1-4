@@ -20,7 +20,11 @@ const MainLayout = () => {
       }}
       isDetail={isDetail}
     >
-      <Meta />
+      <Meta
+        title="차량 상세 | 알티 모빌리티"
+        description="차량 상세 페이지"
+        imageUrl=""
+      />
       <MainHeader />
       <Main>
         <Outlet />

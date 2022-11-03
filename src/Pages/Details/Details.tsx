@@ -1,4 +1,4 @@
-import { Image, Loading } from "@/Components";
+import { Image, Loading, Meta } from "@/Components";
 
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
@@ -33,49 +33,56 @@ const Details = () => {
   }
 
   return (
-    <Container data-id={id}>
-      <HeaderSection>
-        <ImageContainer>
-          <Image src={imageUrl} alt={name} />
-        </ImageContainer>
-        <HeaderInfoContainer>
-          <div className="head-info-title">
-            <h3>{brand}</h3>
-            <h2>{name}</h2>
-          </div>
-          <div className="head-info-amount">
-            <span>월 {amountLocalString} 원</span>
-          </div>
-        </HeaderInfoContainer>
-      </HeaderSection>
-      <Section>
-        <StatusBar>차량 정보</StatusBar>
-        {carInfoList.map((value) => (
-          <SectionItem key={value.name}>
-            <span className="info-title">{value.name}</span>
-            <span className="info-description">{value.description}</span>
-          </SectionItem>
-        ))}
-      </Section>
-      <Section>
-        <StatusBar>보험</StatusBar>
-        {insurance.map((value) => (
-          <SectionItem key={value.name}>
-            <span className="info-title">{value.name}</span>
-            <span className="info-description">{value.description}</span>
-          </SectionItem>
-        ))}
-      </Section>
-      <Section>
-        <StatusBar>추가상품</StatusBar>
-        {newAdditionalProducts.map((value) => (
-          <SectionItem key={value.name}>
-            <span className="info-title">{value.name}</span>
-            <span className="info-description">{value.amount}</span>
-          </SectionItem>
-        ))}
-      </Section>
-    </Container>
+    <>
+      <Meta
+        title={`${brand}${name} | 차량 상세`}
+        description={`월 ${amountLocalString} 원`}
+        imageUrl={imageUrl}
+      />
+      <Container data-id={id}>
+        <HeaderSection>
+          <ImageContainer>
+            <Image src={imageUrl} alt={name} />
+          </ImageContainer>
+          <HeaderInfoContainer>
+            <div className="head-info-title">
+              <h3>{brand}</h3>
+              <h2>{name}</h2>
+            </div>
+            <div className="head-info-amount">
+              <span>월 {amountLocalString} 원</span>
+            </div>
+          </HeaderInfoContainer>
+        </HeaderSection>
+        <Section>
+          <StatusBar>차량 정보</StatusBar>
+          {carInfoList.map((value) => (
+            <SectionItem key={value.name}>
+              <span className="info-title">{value.name}</span>
+              <span className="info-description">{value.description}</span>
+            </SectionItem>
+          ))}
+        </Section>
+        <Section>
+          <StatusBar>보험</StatusBar>
+          {insurance.map((value) => (
+            <SectionItem key={value.name}>
+              <span className="info-title">{value.name}</span>
+              <span className="info-description">{value.description}</span>
+            </SectionItem>
+          ))}
+        </Section>
+        <Section>
+          <StatusBar>추가상품</StatusBar>
+          {newAdditionalProducts.map((value) => (
+            <SectionItem key={value.name}>
+              <span className="info-title">{value.name}</span>
+              <span className="info-description">{value.amount}</span>
+            </SectionItem>
+          ))}
+        </Section>
+      </Container>
+    </>
   );
 };
 
