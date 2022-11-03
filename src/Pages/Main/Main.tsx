@@ -68,54 +68,53 @@ const Main = () => {
   }
 
   return (
-    <>
-      <Container>
-        <SelectButtonContainer>
-          {CARS_BUTTON_OPTIONS.map(({ segment, option }) => (
-            <SelectButton
-              key={segment}
+    <Container>
+      <SelectButtonContainer>
+        {CARS_BUTTON_OPTIONS.map(({ segment, option }) => (
+          <SelectButton
+            key={segment}
+            segment={segment}
+            onClick={handleSearch(segment)}
+          >
+            {option}
+          </SelectButton>
+        ))}
+      </SelectButtonContainer>
+      <CardItemContainer>
+        {cars?.length === 0 ? (
+          <NotFoundCars>
+            <h2>차량이 없습니다.</h2>
+          </NotFoundCars>
+        ) : null}
+        {cars?.map(
+          ({
+            id,
+            attribute: { name, brand, fuelType, segment, imageUrl },
+            amount,
+            createdAt
+          }) => (
+            <CardItem
+              key={id}
+              id={id}
+              name={name}
+              brand={brand}
               segment={segment}
-              onClick={handleSearch(segment)}
-            >
-              {option}
-            </SelectButton>
-          ))}
-        </SelectButtonContainer>
-        <CardItemContainer>
-          {cars?.length === 0 ? (
-            <NotFoundCars>
-              <h2>차량이 없습니다.</h2>
-            </NotFoundCars>
-          ) : null}
-          {cars?.map(
-            ({
-              id,
-              attribute: { name, brand, fuelType, segment, imageUrl },
-              amount,
-              createdAt
-            }) => (
-              <CardItem
-                key={id}
-                id={id}
-                name={name}
-                brand={brand}
-                segment={segment}
-                fuelType={fuelType}
-                amount={amount}
-                imageUrl={imageUrl}
-                createdAt={createdAt}
-              />
-            )
-          )}
-        </CardItemContainer>
-      </Container>
-    </>
+              fuelType={fuelType}
+              amount={amount}
+              imageUrl={imageUrl}
+              createdAt={createdAt}
+            />
+          )
+        )}
+      </CardItemContainer>
+    </Container>
   );
 };
 
 export default Main;
 
 const Container = styled.div``;
+
 const NotFoundCars = styled.div`
   display: grid;
   place-content: center;
